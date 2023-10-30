@@ -1,9 +1,13 @@
 package com.app.newsinshort.ui.components
 
+
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -15,16 +19,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.app.newsinshort.data.entity.Article
 import com.app.newsinshort.data.entity.NewsResponse
 import com.app.newsinshort.ui.theme.Purple40
 
 @Composable
 fun Loader() {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -45,8 +52,8 @@ fun Loader() {
 fun NewsList(response: NewsResponse?) {
     response?.let {
         LazyColumn {
-            items(response!!.articles){ item->
-                NormalTextComponent(textValue = item.description ?: ""  )
+            items(response!!.articles) { item ->
+                NormalTextComponent(textValue = item.description ?: "")
             }
         }
     }
@@ -68,4 +75,46 @@ fun NormalTextComponent(textValue: String) {
     )
 }
 
+@Composable
+fun NewsRowComponent(page: Int, article: Article) {
+    NormalTextComponent(textValue = "$page \n\n ${article.title}")
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+            .background(Color.White)
+    ) {
+
+        AsyncImage(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(240.dp),
+            model = article.urlToImage,
+            contentDescription = "",
+            contentScale = ContentScale.Fit
+
+        )
+
+        Spacer(modifier = Modifier.size(20.dp))
+        NormalTextComponent(textValue = article.title ?: "")
+        Spacer(modifier = Modifier.size(20.dp))
+        NormalTextComponent(textValue = article.content ?: "")
+
+    }
+
+
+}
+
+
+@Preview
+@Composable
+fun NewsRowComponentPreview() {
+    val article = Article(
+        "", "", "", "", null, "", "", ""
+    )
+
+    NewsRowComponent(page = 0, article = article)
+
+}
 

@@ -30,7 +30,7 @@ object Dependencies {
     val hiltNavigationCompose by lazy { "androidx.hilt:hilt-navigation-compose:${Versions.hiltNavigationCompose}" }
     val navigationCompose by lazy { "androidx.navigation:navigation-compose:${Versions.navigationCompose}" }
 
-    val coil by lazy { "io.coil-kt:coil:${Versions.coil}" }
+    val coil by lazy { "io.coil-kt:coil-compose:${Versions.coil}" }
 
     val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
     val gsonConnverter by lazy { "com.squareup.retrofit2:converter-gson:${Versions.gsonConverter}" }

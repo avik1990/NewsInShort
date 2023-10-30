@@ -88,6 +88,8 @@ dependencies {
     implementation(Dependencies.coroutinesAndroid)
 
     implementation(Dependencies.splashscreenCore)
+
+    implementation(Dependencies.coil)
 }
 
 // Allow references to generated code
